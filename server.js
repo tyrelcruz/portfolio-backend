@@ -16,8 +16,16 @@ app.use(morgan("combined"));
 app.use(
   cors({
     origin: process.env.NODE_ENV === "production" 
-      ? process.env.FRONTEND_URL || "https://your-frontend-domain.com"
-      : ["http://localhost:3000", "http://127.0.0.1:3000"],
+      ? [
+          "https://tyrelcruz-portfolio.vercel.app", // Your production domain
+          "http://localhost:3000", // Allow localhost for testing
+          "http://127.0.0.1:3000"
+        ]
+      : [
+          "http://localhost:3000", 
+          "http://127.0.0.1:3000",
+          "https://tyrelcruz-portfolio.vercel.app" // Allow production domain
+        ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
